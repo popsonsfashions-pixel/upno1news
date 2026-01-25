@@ -290,34 +290,191 @@
     color: white;
 }
 
+/* Responsive Design - Tablet */
+@media (max-width: 1024px) {
+    .placementSummary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Responsive Design - Mobile */
 @media (max-width: 768px) {
+    .main {
+        padding: var(--space-lg) 0;
+    }
+
+    .adminCard {
+        padding: var(--space-lg);
+        border-radius: var(--radius-md);
+    }
+
     .header {
         flex-direction: column;
+        align-items: stretch;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .createBtn {
+        width: 100%;
+        justify-content: center;
+        padding: var(--space-md) var(--space-lg);
+        font-size: 1rem;
     }
 
     .placementSummary {
         grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-sm);
+    }
+
+    .placementCard {
+        padding: var(--space-sm);
+    }
+
+    .placementCount {
+        font-size: 1.25rem;
+    }
+
+    .placementLabel {
+        font-size: 0.6875rem;
     }
 
     .stats {
         grid-template-columns: 1fr;
+        gap: var(--space-sm);
+    }
+
+    .stat {
+        padding: var(--space-md);
+    }
+
+    .statNumber {
+        font-size: 1.5rem;
+    }
+
+    .sectionTitle {
+        font-size: 1.125rem;
     }
 
     .articleItem {
         flex-direction: column;
         align-items: flex-start;
+        padding: var(--space-md);
+        gap: var(--space-md);
+    }
+
+    .articleInfo h3 {
+        white-space: normal;
+        font-size: 0.9375rem;
+        line-height: 1.4;
     }
 
     .articleControls {
         width: 100%;
-        align-items: flex-start;
+        align-items: stretch;
+        gap: var(--space-md);
+    }
+
+    .placementControl {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-xs);
+    }
+
+    .placementSelect {
+        width: 100%;
+        padding: var(--space-sm);
+        font-size: 0.875rem;
     }
 
     .articleActions {
         width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-sm);
     }
 
     .articleActions button {
         flex: 1;
+        padding: var(--space-sm);
+        font-size: 0.8125rem;
+        min-height: 44px;
+        /* Touch-friendly */
+    }
+
+    .deleteBtn {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Responsive Design - Small Mobile */
+@media (max-width: 480px) {
+    .main {
+        padding: var(--space-md) 0;
+    }
+
+    .adminCard {
+        padding: var(--space-md);
+    }
+
+    .title {
+        font-size: 1.25rem;
+    }
+
+    .subtitle {
+        font-size: 0.875rem;
+    }
+
+    .placementSummary {
+        grid-template-columns: 1fr;
+    }
+
+    .placementCard {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+        padding: var(--space-md);
+    }
+
+    .placementCount {
+        font-size: 1.75rem;
+    }
+
+    .placementLabel {
+        font-size: 0.75rem;
+    }
+
+    .stats {
+        gap: var(--space-xs);
+    }
+
+    .articleItem {
+        padding: var(--space-sm);
+    }
+
+    .articleInfo h3 {
+        font-size: 0.875rem;
+    }
+
+    .articleInfo p {
+        font-size: 0.75rem;
+    }
+
+    .articleBadges {
+        flex-wrap: wrap;
+    }
+
+    .published,
+    .draft,
+    .placementBadge {
+        font-size: 0.625rem;
+        padding: 2px 6px;
+    }
+
+    .sectionTitle {
+        font-size: 1rem;
     }
 }
