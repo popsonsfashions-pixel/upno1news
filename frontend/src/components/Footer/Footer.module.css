@@ -1,0 +1,76 @@
+.footer {
+    background: var(--bg-dark);
+    color: var(--text-white);
+    padding: var(--space-2xl) 0;
+    margin-top: var(--space-2xl);
+}
+
+.footerContent {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-2xl);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-xl);
+}
+
+.footerInfo {
+    max-width: 400px;
+}
+
+.footerLogo {
+    height: 50px;
+    width: auto;
+    margin-bottom: var(--space-md);
+}
+
+.footerDesc {
+    font-size: 0.875rem;
+    opacity: 0.7;
+    line-height: 1.6;
+}
+
+.footerLinks {
+    display: flex;
+    gap: var(--space-2xl);
+}
+
+.linkGroup h4 {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-md);
+    color: var(--accent-red);
+}
+
+.linkGroup a {
+    display: block;
+    font-size: 0.8125rem;
+    opacity: 0.8;
+    margin-bottom: var(--space-xs);
+    color: var(--text-white);
+}
+
+.linkGroup a:hover {
+    color: var(--accent-red);
+    opacity: 1;
+}
+
+.footerBottom {
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.75rem;
+    opacity: 0.5;
+    text-align: center;
+}
+
+.footerAds {
+    padding-bottom: var(--space-xl);
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .footerContent {
+        flex-direction: column;
+    }
+}

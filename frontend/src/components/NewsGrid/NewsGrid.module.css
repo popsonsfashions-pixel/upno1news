@@ -1,0 +1,9 @@
+.newsGrid {
+    margin-bottom: var(--space-xl);
+}
+
+.newsWrap {
+    background: var(--bg-card);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}

@@ -1,0 +1,146 @@
+.main {
+    min-height: 100vh;
+    padding: var(--space-2xl) 0;
+    background: var(--bg-body);
+}
+
+.loading,
+.notLoggedIn {
+    text-align: center;
+    padding: var(--space-2xl);
+    color: var(--text-secondary);
+}
+
+.notLoggedIn h1 {
+    margin-bottom: var(--space-md);
+}
+
+.profileCard {
+    max-width: 500px;
+    margin: 0 auto;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-lg);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent-red) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.name {
+    font-family: var(--font-headline);
+    font-size: 1.5rem;
+    margin-bottom: var(--space-xs);
+}
+
+.role {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--accent-red);
+    background: rgba(224, 32, 32, 0.1);
+    padding: 4px 12px;
+    border-radius: 12px;
+    margin-bottom: var(--space-xl);
+}
+
+.info {
+    text-align: left;
+    border-top: 1px solid var(--border-light);
+    padding-top: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.infoRow {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.infoRow:last-child {
+    border-bottom: none;
+}
+
+.infoRow label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.infoRow span {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.userId {
+    font-family: monospace;
+    font-size: 0.75rem !important;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.active {
+    color: #22c55e !important;
+}
+
+.signOutBtn {
+    width: 100%;
+    padding: var(--space-md);
+    background: transparent;
+    color: var(--accent-red);
+    border: 1px solid var(--accent-red);
+    border-radius: var(--radius-sm);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.signOutBtn:hover {
+    background: var(--accent-red);
+    color: white;
+}
+
+.securitySection {
+    margin: var(--space-xl) 0;
+    text-align: left;
+}
+
+.securitySection h3 {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 2px solid var(--border-light);
+}
+
+.enableBtn {
+    padding: var(--space-xs) var(--space-md);
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.enableBtn:hover {
+    background: var(--accent-red);
+}

@@ -1,0 +1,36 @@
+.heroSection {
+    margin-bottom: var(--space-xl);
+}
+
+.heroGrid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: repeat(2, 200px);
+    gap: var(--grid-gap);
+}
+
+.heroMain {
+    grid-row: span 2;
+}
+
+@media (max-width: 1024px) {
+    .heroGrid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+    }
+
+    .heroMain {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .heroGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .heroMain {
+        grid-column: span 1;
+    }
+}
