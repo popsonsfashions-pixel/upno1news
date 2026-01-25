@@ -4,7 +4,8 @@ import ArticleClient from './ArticleClient';
 
 // Server-side metadata generation for social sharing
 export async function generateMetadata({ params }) {
-    const { id } = params;
+    // Next.js 15+ requires awaiting params
+    const { id } = await params;
 
     try {
         // Fetch article data for metadata
@@ -53,6 +54,8 @@ export async function generateMetadata({ params }) {
     };
 }
 
-export default function ArticlePageWrapper({ params }) {
-    return <ArticleClient />;
+export default async function ArticlePageWrapper({ params }) {
+    // Next.js 15+ requires awaiting params
+    const { id } = await params;
+    return <ArticleClient articleId={id} />;
 }

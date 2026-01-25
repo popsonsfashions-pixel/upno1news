@@ -2,7 +2,8 @@ import { db } from '@/lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
 export async function generateMetadata({ params }) {
-    const { id } = params;
+    // Next.js 15+ requires awaiting params
+    const { id } = await params;
 
     try {
         // Fetch article data server-side
