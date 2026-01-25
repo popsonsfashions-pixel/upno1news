@@ -144,8 +144,8 @@ export async function createArticle(data, userId, userEmail) {
             created_at: serverTimestamp(),
             updated_at: serverTimestamp(),
         });
-        console.log('Article created:', docRef.id);
-        return { success: true, id: docRef.id };
+        // Article created successfully
+        return { success: true, articleId: docRef.id };
     } catch (error) {
         console.error('Error creating article:', error);
         return { success: false, error: error.message };
