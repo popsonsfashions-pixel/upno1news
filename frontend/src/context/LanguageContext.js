@@ -153,6 +153,83 @@ const translations = {
         newsletter: "ताज़ा खबरें अपने इनबॉक्स में पाएं",
         subscribe: "सब्सक्राइब",
         yourEmail: "आपका ईमेल",
+
+        // NEW TRANSLATIONS - Forms & Validation
+        title: "शीर्षक",
+        content: "सामग्री",
+        category: "श्रेणी",
+        subcategory: "उपश्रेणी",
+        optional: "वैकल्पिक",
+        required: "आवश्यक",
+        select: "चुनें",
+
+        // Writer/Reporter Panel
+        writeNewArticle: "नया लेख लिखें",
+        createEngagingArticles: "रोचक लेख बनाएं। एडमिन समीक्षा के बाद प्रकाशित करेंगे।",
+        enterCompellingHeadline: "आकर्षक शीर्षक दर्ज करें...",
+        writeArticleContent: "अपना लेख यहाँ लिखें...\n\nआप कई पैराग्राफ लिख सकते हैं। नया पैराग्राफ बनाने के लिए दो बार Enter दबाएं।",
+        uploadImages: "छवियाँ अपलोड करें",
+        uploadImagesDirectly: "छवियाँ सीधे अपलोड करें। प्रत्येक छवि के लिए स्थान चुनें।",
+        uploadedImages: "अपलोड की गई छवियाँ",
+        creating: "बना रहे हैं...",
+        articleCreatedSuccess: "✓ लेख बनाया गया! एडमिन पर रीडायरेक्ट कर रहे हैं...",
+
+        // Access Control
+        accessDeniedTitle: "प्रवेश अस्वीकृत",
+        reporterAdminRequired: "लेख लिखने के लिए आपको रिपोर्टर या एडमिन होना आवश्यक है।",
+
+        // Auth Messages
+        loginFailed: "लॉगिन विफल",
+        registrationFailed: "पंजीकरण विफल",
+        emailPasswordRequired: "ईमेल और पासवर्ड आवश्यक हैं",
+        invalidCredentials: "अमान्य प्रमाण-पत्र",
+        alreadyHaveAccount: "पहले से खाता है?",
+        dontHaveAccount: "खाता नहीं है?",
+        loginHere: "यहाँ लॉगिन करें",
+        registerHere: "यहाँ रजिस्टर करें",
+
+        // Article Actions
+        editArticle: "लेख संपादित करें",
+        deleteArticle: "लेख हटाएं",
+        articleDeleted: "लेख हटा दिया गया",
+        confirmDeleteArticle: "क्या आप वाकई इस लेख को हटाना चाहते हैं?",
+        articleNotFound: "लेख नहीं मिला",
+        articleDoesNotExist: "यह लेख मौजूद नहीं है।",
+        backToHome: "होम पर वापस जाएं",
+
+        // Image Positions
+        auto: "स्वचालित",
+        top: "शीर्ष",
+        left: "बाएं",
+        right: "दाएं",
+        center: "केंद्र",
+        bottom: "नीचे",
+        gallery: "गैलरी",
+        caption: "कैप्शन",
+        remove: "हटाएं",
+
+        // Statuses
+        published: "प्रकाशित",
+        draft: "ड्राफ्ट",
+        pending: "लंबित",
+
+        // Profile
+        myProfile: "मेरी प्रोफ़ाइल",
+        settings: "सेटिंग्स",
+        profile: "प्रोफ़ाइल",
+
+        // Common Actions
+        create: "बनाएं",
+        update: "अपडेट करें",
+        cancel: "रद्द करें",
+        close: "बंद करें",
+        submit: "सबमिट करें",
+        edit: "संपादित करें",
+
+        // Error Messages
+        errorOccurred: "एक त्रुटि हुई",
+        pleaseTryAgain: "कृपया पुनः प्रयास करें",
+        loadingArticle: "लेख लोड हो रहा है...",
     }
 };
 

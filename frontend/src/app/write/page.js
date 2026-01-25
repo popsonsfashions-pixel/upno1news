@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { createArticle } from '@/hooks/useFirestore';
+import { useLanguage } from '@/context/LanguageContext';
 import Header from '@/components/Header/Header';
 import ImageUploader from '@/components/ImageUploader/ImageUploader';
 import { menuCategories } from '@/data/sampleNews';
@@ -12,6 +13,7 @@ import styles from './write.module.css';
 export default function WritePage() {
     const router = useRouter();
     const { user, userData, loading, canWrite } = useAuth();
+    const { language, t } = useLanguage();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
@@ -40,7 +42,7 @@ export default function WritePage() {
                 <Header />
                 <main className={styles.main}>
                     <div className="container">
-                        <div className={styles.loading}>Loading...</div>
+                        <div className={styles.loading}>{t('loading')}</div>
                     </div>
                 </main>
             </>
@@ -54,8 +56,8 @@ export default function WritePage() {
                 <main className={styles.main}>
                     <div className="container">
                         <div className={styles.accessDenied}>
-                            <h1>Access Denied</h1>
-                            <p>You need to be a Reporter or Admin to write articles.</p>
+                            <h1>{t('accessDeniedTitle')}</h1>
+                            <p>{t('reporterAdminRequired')}</p>
                         </div>
                     </div>
                 </main>
@@ -97,7 +99,7 @@ export default function WritePage() {
                 setSuccess(true);
                 setTimeout(() => router.push('/admin'), 2000);
             } else {
-                setError(result.error || 'Failed to create article');
+                setError(result.error || t('errorOccurred'));
             }
         } catch (err) {
             setError(err.message);
@@ -112,26 +114,26 @@ export default function WritePage() {
             <main className={styles.main}>
                 <div className="container">
                     <div className={styles.writeCard}>
-                        <h1 className={styles.title}>Write New Article</h1>
+                        <h1 className={styles.title}>{t('writeNewArticle')}</h1>
                         <p className={styles.subtitle}>
-                            Create engaging articles with images. Admins can publish after review.
+                            {t('createEngagingArticles')}
                         </p>
 
                         {error && <div className={styles.error}>{error}</div>}
                         {success && (
                             <div className={styles.success}>
-                                ✓ Article created! Redirecting to admin...
+                                {t('articleCreatedSuccess')}
                             </div>
                         )}
 
                         <form onSubmit={handleSubmit} className={styles.form}>
                             <div className={styles.inputGroup}>
-                                <label>Title *</label>
+                                <label>{t('title')} *</label>
                                 <input
                                     type="text"
                                     value={title}
                                     onChange={(e) => setTitle(e.target.value)}
-                                    placeholder="Enter compelling headline..."
+                                    placeholder={t('enterCompellingHeadline')}
                                     required
                                     minLength={5}
                                 />
@@ -139,7 +141,7 @@ export default function WritePage() {
 
                             <div className={styles.row}>
                                 <div className={styles.inputGroup}>
-                                    <label>Category *</label>
+                                    <label>{t('category')} *</label>
                                     <select
                                         value={category}
                                         onChange={(e) => {
@@ -157,12 +159,12 @@ export default function WritePage() {
 
                                 {subOptions.length > 0 && (
                                     <div className={styles.inputGroup}>
-                                        <label>Subcategory (Optional)</label>
+                                        <label>{t('subcategory')} ({t('optional')})</label>
                                         <select
                                             value={subcategory}
                                             onChange={(e) => setSubcategory(e.target.value)}
                                         >
-                                            <option value="">-- Select --</option>
+                                            <option value="">-- {t('select')} --</option>
                                             {subOptions.map(sub => (
                                                 <option key={sub.name} value={sub.name}>
                                                     {sub.name}
@@ -175,9 +177,9 @@ export default function WritePage() {
 
                             {/* Image Upload Section */}
                             <div className={styles.imageSection}>
-                                <h3 className={styles.sectionTitle}>📷 Upload Images</h3>
+                                <h3 className={styles.sectionTitle}>📷 {t('uploadImages')}</h3>
                                 <p className={styles.sectionHint}>
-                                    Upload images directly. Choose position for each image.
+                                    {t('uploadImagesDirectly')}
                                 </p>
 
                                 <ImageUploader onImageAdd={handleImageAdd} disabled={submitting} />
@@ -185,7 +187,7 @@ export default function WritePage() {
                                 {/* Uploaded Images List */}
                                 {images.length > 0 && (
                                     <div className={styles.imageList}>
-                                        <h4>Uploaded Images ({images.length})</h4>
+                                        <h4>{t('uploadedImages')} ({images.length})</h4>
                                         {images.map((img) => (
                                             <div key={img.id} className={styles.imageItem}>
                                                 <img src={img.url} alt={img.caption || 'Uploaded'} />
@@ -195,14 +197,14 @@ export default function WritePage() {
                                                         onChange={(e) => updateImagePosition(img.id, e.target.value)}
                                                         className={styles.positionDropdown}
                                                     >
-                                                        <option value="auto">Auto</option>
-                                                        <option value="hero">Hero</option>
-                                                        <option value="top">Top</option>
-                                                        <option value="left">Left</option>
-                                                        <option value="right">Right</option>
-                                                        <option value="center">Center</option>
-                                                        <option value="bottom">Bottom</option>
-                                                        <option value="gallery">Gallery</option>
+                                                        <option value="auto">{t('auto')}</option>
+                                                        <option value="hero">{t('hero')}</option>
+                                                        <option value="top">{t('top')}</option>
+                                                        <option value="left">{t('left')}</option>
+                                                        <option value="right">{t('right')}</option>
+                                                        <option value="center">{t('center')}</option>
+                                                        <option value="bottom">{t('bottom')}</option>
+                                                        <option value="gallery">{t('gallery')}</option>
                                                     </select>
                                                     {img.caption && <span className={styles.caption}>{img.caption}</span>}
                                                 </div>
@@ -220,13 +222,11 @@ export default function WritePage() {
                             </div>
 
                             <div className={styles.inputGroup}>
-                                <label>Content *</label>
+                                <label>{t('content')} *</label>
                                 <textarea
                                     value={content}
                                     onChange={(e) => setContent(e.target.value)}
-                                    placeholder="Write your article content here...
-
-You can write multiple paragraphs. Press Enter twice to create a new paragraph."
+                                    placeholder={t('writeArticleContent')}
                                     rows={15}
                                     required
                                     minLength={50}
@@ -238,7 +238,7 @@ You can write multiple paragraphs. Press Enter twice to create a new paragraph."
                                 className={styles.submitBtn}
                                 disabled={submitting}
                             >
-                                {submitting ? 'Creating...' : 'Create Article'}
+                                {submitting ? t('creating') : t('createArticle')}
                             </button>
                         </form>
                     </div>
