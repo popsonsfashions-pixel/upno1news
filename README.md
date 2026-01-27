@@ -1,166 +1,36 @@
-# FastAPI Boilerplate with PostgreSQL & Role-Based Access Control
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A production-ready FastAPI backend with PostgreSQL database, SQLAlchemy ORM, and role-based access control for Articles management.
+## Getting Started
 
-## Features
-
-- 🚀 **FastAPI** - Modern, fast web framework
-- 🐘 **PostgreSQL** - Robust database with async support
-- 🔐 **JWT Authentication** - Secure token-based auth
-- 👥 **Role-Based Access Control** - Admin, Reporter, Reader roles
-- 📝 **Articles CRUD** - Full article management
-- 🔒 **Admin-Only Publish** - Secured publish endpoint
-- 📊 **Alembic Migrations** - Database version control
-- 📖 **Auto-generated Docs** - Swagger UI & ReDoc
-
-## User Roles
-
-| Role | Permissions |
-|------|-------------|
-| **Admin** | Full CRUD + Publish articles + Manage users |
-| **Reporter** | Create, Read, Update own articles (no publish) |
-| **Reader** | Read published articles only |
-
-## Quick Start
-
-### 1. Install Dependencies
+First, run the development server:
 
 ```bash
-pip install -r requirements.txt
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-### 2. Configure Environment
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Copy `.env.example` to `.env` and update with your PostgreSQL credentials:
+You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-```bash
-cp .env.example .env
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-Edit `.env`:
-```env
-DATABASE_URL=postgresql+asyncpg://username:password@localhost:5432/your_database
-SECRET_KEY=your-super-secret-key-change-in-production
-```
+## Learn More
 
-### 3. Create Database
+To learn more about Next.js, take a look at the following resources:
 
-Make sure PostgreSQL is running from the command line and run:
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-```sql
-CREATE DATABASE your_database;
-```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-### 4. Run Migrations (Optional)
+## Deploy on Vercel
 
-```bash
-alembic revision --autogenerate -m "Initial migration"
-alembic upgrade head
-```
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Or let the app create tables automatically on startup.
-
-### 5. Start the Server
-
-```bash
-uvicorn app.main:app --reload
-```
-
-### 6. Access API Documentation
-
-- **Swagger UI**: http://127.0.0.1:8000/docs
-- **ReDoc**: http://127.0.0.1:8000/redoc
-
-## API Endpoints
-
-### Authentication
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/auth/register` | Register a new user |
-| POST | `/auth/login` | Login and get JWT token |
-
-### Users (Admin Only)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/users/me` | Get current user info |
-| GET | `/users/` | List all users |
-| PATCH | `/users/{id}` | Update a user |
-| DELETE | `/users/{id}` | Delete a user |
-
-### Articles
-| Method | Endpoint | Access | Description |
-|--------|----------|--------|-------------|
-| GET | `/articles/` | All authenticated | List articles |
-| GET | `/articles/{id}` | All authenticated | Get article |
-| POST | `/articles/` | Reporter, Admin | Create article |
-| PUT | `/articles/{id}` | Owner, Admin | Update article |
-| DELETE | `/articles/{id}` | Admin only | Delete article |
-| POST | `/articles/{id}/publish` | **Admin only** | Publish article |
-| POST | `/articles/{id}/unpublish` | Admin only | Unpublish article |
-
-## Project Structure
-
-```
-├── app/
-│   ├── __init__.py
-│   ├── main.py              # FastAPI application
-│   ├── config.py            # Configuration settings
-│   ├── database.py          # Database connection
-│   ├── models/              # SQLAlchemy models
-│   │   ├── user.py          # User & Role
-│   │   └── article.py       # Article
-│   ├── schemas/             # Pydantic schemas
-│   │   ├── user.py
-│   │   └── article.py
-│   ├── routers/             # API endpoints
-│   │   ├── auth.py
-│   │   ├── users.py
-│   │   └── articles.py
-│   ├── services/            # Business logic
-│   │   └── auth.py
-│   └── dependencies/        # FastAPI dependencies
-│       └── permissions.py   # Role-based access
-├── alembic/                 # Database migrations
-├── alembic.ini
-├── requirements.txt
-├── .env.example
-└── README.md
-```
-
-## Usage Example
-
-### 1. Register an Admin User
-
-```bash
-curl -X POST "http://127.0.0.1:8000/auth/register" \
-     -H "Content-Type: application/json" \
-     -d '{"email": "admin@example.com", "password": "adminpass123", "role": "admin"}'
-```
-
-### 2. Login
-
-```bash
-curl -X POST "http://127.0.0.1:8000/auth/login" \
-     -H "Content-Type: application/x-www-form-urlencoded" \
-     -d "username=admin@example.com&password=adminpass123"
-```
-
-### 3. Create an Article (with token)
-
-```bash
-curl -X POST "http://127.0.0.1:8000/articles/" \
-     -H "Authorization: Bearer <your_token>" \
-     -H "Content-Type: application/json" \
-     -d '{"title": "My First Article", "content": "This is the content."}'
-```
-
-### 4. Publish Article (Admin Only)
-
-```bash
-curl -X POST "http://127.0.0.1:8000/articles/1/publish" \
-     -H "Authorization: Bearer <admin_token>"
-```
-
-## License
-
-MIT License
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

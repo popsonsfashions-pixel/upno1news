@@ -12,13 +12,18 @@ async function inspectFeed() {
             ]
         }
     });
-    const FEED_URL = 'https://news.google.com/rss/search?q=Bollywood&hl=hi&gl=IN&ceid=IN:hi';
+    const FEED_URL = 'https://news.google.com/rss/headlines/section/topic/ENTERTAINMENT.HI_IN?hl=hi&gl=IN&ceid=IN:hi';
 
     try {
         const feed = await parser.parseURL(FEED_URL);
         console.log("Total items:", feed.items.length);
         if (feed.items.length > 0) {
-            console.log("First Item Structure:", JSON.stringify(feed.items[0], null, 2));
+            const item = feed.items[0];
+            console.log("Keys:", Object.keys(item));
+            console.log("Description:", item.description);
+            console.log("Content:", item.content);
+            console.log("Media Content:", item.mediaContent);
+            console.log("Enclosure:", item.enclosure);
         }
     } catch (e) {
         console.error("Error:", e);

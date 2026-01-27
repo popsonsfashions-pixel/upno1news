@@ -1,0 +1,32 @@
+.main {
+    min-height: 80vh;
+    padding: var(--space-xl) 0;
+    background: var(--bg-body);
+}
+
+.title {
+    font-family: var(--font-headline);
+    font-size: 2rem;
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
+    border-bottom: 2px solid var(--primary);
+}
+
+.loading,
+.error,
+.noResults {
+    text-align: center;
+    padding: var(--space-2xl);
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+.error {
+    color: var(--accent-red);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-lg);
+}

@@ -1,0 +1,12 @@
+{
+    "buildCommand": "next build",
+    "framework": "nextjs",
+    "installCommand": "npm install",
+    "ignoreCommand": "echo 'Skipping Python build'",
+    "rewrites": [
+        {
+            "source": "/api/(.*)",
+            "destination": "/api/index.py"
+        }
+    ]
+}

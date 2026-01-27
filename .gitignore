@@ -1,75 +1,50 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Firebase credentials (SENSITIVE!)
-firebase-credentials.json
-*$py.class
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
-# C extensions
-*.so
+# testing
+/coverage
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+# next.js
+/.next/
+/out/
 
-# Virtual environments
-venv/
-ENV/
-env/
-.venv/
+# production
+/build
 
-# Environment variables
-.env
-.env.local
-.env.production
-
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Logs
-*.log
-
-# Database
-*.db
-*.sqlite3
-
-# Next.js / Frontend
-frontend/node_modules/
-frontend/.next/
-frontend/out/
-frontend/build/
-frontend/dist/
-
-# Dependencies
-node_modules/
-
-# OS
+# misc
 .DS_Store
-Thumbs.db
+*.pem
 
-# Antigravity artifacts (optional - remove if you want to commit)
-.gemini/
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# Firebase sensitive credentials
+firebase-credentials.json
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+.vercel
+.env*.local
+
+# Firebase cache/emulators
+.firebase/
