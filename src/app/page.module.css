@@ -515,7 +515,7 @@
     margin-left: calc(-1 * var(--space-md));
     margin-right: calc(-1 * var(--space-md));
     margin-top: calc(-1 * var(--space-md));
-    padding: var(--space-sm) var(--space-md);
+    padding: 6px var(--space-md);
     background: linear-gradient(90deg, #cc0000, #e02020);
     color: #ffffff;
     border-bottom: 3px solid rgba(0,0,0,0.15);
@@ -569,7 +569,7 @@
     margin-left: calc(-1 * var(--space-sm));
     margin-right: calc(-1 * var(--space-sm));
     margin-top: calc(-1 * var(--space-sm));
-    padding: var(--space-sm) var(--space-md);
+    padding: 4px var(--space-md);
     background: linear-gradient(90deg, #cc0000, #e02020);
     color: #ffffff;
     border-bottom: none;

@@ -143,8 +143,8 @@
     gap: 4px;
     padding: var(--space-md) var(--space-lg);
     color: var(--text-white);
-    font-size: 0.8125rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     transition: background var(--transition-fast);
@@ -211,8 +211,8 @@
 
 .megaMenuColumn h4 {
     font-family: var(--font-primary);
-    font-size: 0.6875rem;
-    font-weight: 700;
+    font-size: 0.9375rem;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--accent-red);
@@ -230,10 +230,10 @@
 }
 
 .megaMenuColumn a {
-    font-size: 0.8125rem;
+    font-size: 1rem;
     color: var(--text-secondary);
     display: block;
-    padding: 3px 0;
+    padding: 6px 0;
 }
 
 .megaMenuColumn a:hover {
@@ -378,7 +378,8 @@
 
     .navLink {
         padding: var(--space-xs) var(--space-sm);
-        font-size: 0.625rem;
+        font-size: 0.9375rem;
+        font-weight: 600;
     }
 
     .megaMenu {
@@ -386,12 +387,12 @@
     }
 
     .megaMenuColumn a {
-        font-size: 0.75rem;
-        padding: 4px 0;
+        font-size: 0.9375rem;
+        padding: 6px 0;
     }
 
     .megaMenuColumn h4 {
-        font-size: 0.625rem;
+        font-size: 0.875rem;
     }
 }
 
