@@ -61,7 +61,6 @@ export default function Header() {
                     </div>
 
                     <div className={styles.headerActions}>
-                        <UserMenu />
                     </div>
                 </div>
 

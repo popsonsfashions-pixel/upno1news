@@ -213,7 +213,7 @@
 
 @keyframes ticker {
   0% {
-    transform: translateX(100%);
+    transform: translateX(100vw);
   }
 
   100% {
@@ -477,7 +477,7 @@
 
   .breakingNews {
     margin-bottom: var(--space-sm);
-    padding: var(--space-sm) var(--space-md);
+    padding: 4px var(--space-md);
     border-radius: 0;
   }
 
@@ -532,7 +532,7 @@
 
   .breakingNews {
     margin-bottom: var(--space-sm);
-    padding: var(--space-sm) var(--space-md);
+    padding: 4px var(--space-xs);
     border-radius: 0;
   }
 

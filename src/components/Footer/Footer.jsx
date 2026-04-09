@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useAds } from '@/hooks/useFirestore';
 import { useLanguage } from '@/context/LanguageContext';
 import AdBanner from '@/components/AdBanner/AdBanner';
+import UserMenu from '@/components/Auth/UserMenu';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -52,6 +53,9 @@ export default function Footer() {
                 </div>
 
                 <div className={styles.footerBottom}>
+                    <div className={styles.footerAuth}>
+                        <UserMenu />
+                    </div>
                     <p>&copy; {new Date().getFullYear()} UP News No.1. All rights reserved.</p>
                 </div>
             </div>
