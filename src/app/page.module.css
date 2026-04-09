@@ -532,18 +532,18 @@
 
   .breakingNews {
     margin-bottom: var(--space-sm);
-    padding: 4px var(--space-xs);
+    padding: 1px var(--space-xs);
     border-radius: 0;
   }
 
   .breakingLabel {
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     font-weight: 800;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
   }
 
   .breakingScroll a {
-    font-size: 0.875rem;
+    font-size: 0.75rem;
   }
 
   .heroMain {
@@ -563,13 +563,13 @@
 
   /* RED BACKGROUND section titles - newspaper style */
   .sectionTitle {
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: 800;
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
     margin-left: calc(-1 * var(--space-sm));
     margin-right: calc(-1 * var(--space-sm));
     margin-top: calc(-1 * var(--space-sm));
-    padding: 4px var(--space-md);
+    padding: 2px var(--space-md);
     background: linear-gradient(90deg, #cc0000, #e02020);
     color: #ffffff;
     border-bottom: none;
