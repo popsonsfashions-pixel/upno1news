@@ -34,27 +34,7 @@ export default function Header() {
 
     return (
         <header className={styles.header}>
-            {/* Top Bar */}
             <div className="container">
-                <div className={styles.topBar}>
-                    <div className={styles.topBarLinks}>
-                        <Link href="/">🏠 Home</Link>
-                        <Link href="/e-paper">E-Paper</Link>
-                        <Link href="/videos">Videos</Link>
-                        <Link href="/photos">Photos</Link>
-                    </div>
-                    <div className={styles.topBarRight}>
-                        {/* Language Switcher Removed */}
-                        <span className={styles.date}>
-                            {new Date().toLocaleDateString(language === 'hi' ? 'hi-IN' : 'en-IN', {
-                                weekday: 'long',
-                                day: 'numeric',
-                                month: 'long',
-                                year: 'numeric'
-                            })}
-                        </span>
-                    </div>
-                </div>
 
                 {/* Main Header */}
                 <div className={styles.mainHeader}>

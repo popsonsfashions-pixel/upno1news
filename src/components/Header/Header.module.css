@@ -71,7 +71,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--space-md) 0;
+    padding: var(--space-lg) 0;
 }
 
 .headerAds {
@@ -83,15 +83,14 @@
 .logo {
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
+    flex-shrink: 0;
 }
 
 .logoImg {
-    height: 100px;
+    height: 70px;
     width: auto;
     display: block;
     object-fit: contain;
-    background: transparent;
 }
 
 .searchBar {
@@ -322,7 +321,7 @@
     }
 
     .mainHeader {
-        padding: var(--space-sm) 0;
+        padding: var(--space-md) 0;
     }
 
     .logoImg {
@@ -370,7 +369,7 @@
 
 @media (max-width: 480px) {
     .mainHeader {
-        padding: var(--space-xs) 0;
+        padding: var(--space-sm) 0;
     }
 
     .logoImg {
@@ -425,10 +424,4 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         z-index: 1000;
     }
-
-    .navItem:hover .megaMenu {
-        /* On mobile, we rely on active class or state, not hover */
-        /* But since we use same state variable activeMenu, it's fine */
-    }
-
 }

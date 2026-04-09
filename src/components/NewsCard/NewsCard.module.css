@@ -296,41 +296,32 @@
    ============================================ */
 @media (max-width: 768px) {
     .hero .title {
-        font-size: 1.25rem;
-    }
-
-    .hero .excerpt {
-        display: none;
-    }
-
-    .heroMain .title {
         font-size: 1.375rem;
     }
 
+    .heroMain .title {
+        font-size: 1.5rem;
+    }
+
     .list .image {
-        width: 120px;
-        height: 80px;
+        width: 130px;
+        height: 90px;
     }
 
     .list .title {
-        font-size: 0.9375rem;
-    }
-
-    .list .excerpt {
-        display: none;
+        font-size: 1rem;
+        font-weight: 700;
     }
 }
 
 @media (max-width: 480px) {
 
-    /* Hero Secondary Cards Mobile Style (Stacked) */
-    /* Hero Cards Mobile Style (Stacked for ALL) */
+    /* Hero Cards Mobile - stacked layout */
     .hero {
         display: flex;
         flex-direction: column;
         height: auto;
         border-bottom: 3px solid var(--accent-red);
-        /* Added accent */
         margin-bottom: var(--space-md);
     }
 
@@ -351,48 +342,71 @@
         inset: auto;
     }
 
-    .hero .title {
-        font-size: 1.125rem;
-        color: var(--text-primary);
-        margin-bottom: 0;
-        text-shadow: none;
+    /* Show category badge on mobile */
+    .hero .category {
+        display: inline-block;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        background: var(--accent-red);
+        color: white;
+        padding: 3px 8px;
+        border-radius: 2px;
+        margin-bottom: var(--space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
     }
 
-    /* Hide extra elements on mobile for ALL hero cards */
-    .hero .excerpt,
-    .hero .category,
+    .hero .title {
+        font-size: 1.1875rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: var(--space-xs);
+        text-shadow: none;
+        line-height: 1.3;
+    }
+
+    /* Show meta (time) on mobile */
     .hero .meta {
+        display: flex;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        opacity: 1;
+    }
+
+    /* Hide excerpt only */
+    .hero .excerpt {
         display: none;
     }
 
-    /* Reset Main specific overrides if any */
     .heroMain .title {
-        font-size: 1.125rem;
-        /* Ensure consistent size */
+        font-size: 1.25rem;
     }
 
+    /* List card improvements */
     .list {
-        padding: var(--space-sm);
+        padding: var(--space-md) var(--space-sm);
         gap: var(--space-sm);
     }
 
     .list .image {
-        width: 100px;
-        height: 70px;
+        width: 110px;
+        height: 80px;
     }
 
     .list .title {
-        font-size: 0.875rem;
+        font-size: 0.9375rem;
+        font-weight: 700;
         -webkit-line-clamp: 3;
         line-clamp: 3;
     }
 
     .list .category {
-        font-size: 0.5625rem;
+        font-size: 0.625rem;
+        font-weight: 700;
     }
 
     .list .meta {
-        font-size: 0.6875rem;
+        font-size: 0.75rem;
     }
 
     .sidebar .image {
@@ -401,6 +415,7 @@
     }
 
     .sidebar .title {
-        font-size: 0.75rem;
+        font-size: 0.8125rem;
+        font-weight: 600;
     }
 }
