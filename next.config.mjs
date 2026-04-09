@@ -2,6 +2,7 @@
 const nextConfig = {
   // Image optimization
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -11,7 +12,7 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
-    minimumCacheTTL: 3600, // Cache images for 1 hour (was 60s)
+    minimumCacheTTL: 3600, // Cache images for 1 hour
   },
   // Compression
   compress: true,
