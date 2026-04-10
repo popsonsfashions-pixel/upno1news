@@ -1,0 +1,176 @@
+.container {
+    position: relative;
+    /* Keeps the component isolated in the header */
+}
+
+.locationBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: var(--space-xs) var(--space-sm);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.locationBtn:hover {
+    background: var(--bg-hover);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.icon {
+    color: var(--accent-red);
+}
+
+/* Modal Overlay */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-normal);
+}
+
+.modalOverlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Modal Content Box */
+.modalContent {
+    background: var(--bg-body);
+    width: 90%;
+    max-width: 600px;
+    max-height: 85vh;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    display: flex;
+    flex-direction: column;
+    transform: translateY(20px);
+    transition: transform var(--transition-normal);
+}
+
+.modalOverlay.open .modalContent {
+    transform: translateY(0);
+}
+
+/* Modal Header */
+.modalHeader {
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modalHeader h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.closeBtn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    transition: background var(--transition-fast);
+}
+
+.closeBtn:hover {
+    background: var(--bg-hover);
+    color: var(--accent-red);
+}
+
+/* Search Bar in Modal */
+.searchWrapper {
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.searchInput {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 0.9375rem;
+    font-family: inherit;
+    outline: none;
+    background: var(--bg-container);
+    color: var(--text-primary);
+    transition: border-color var(--transition-fast);
+}
+
+.searchInput:focus {
+    border-color: var(--primary);
+}
+
+/* Districts Grid */
+.districtsGrid {
+    padding: var(--space-lg);
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-sm);
+}
+
+.districtBtn {
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--bg-container);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.districtBtn:hover {
+    background: var(--bg-hover);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .districtsGrid {
+        grid-template-columns: repeat(2, 1fr);
+        padding: var(--space-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .districtsGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .locationBtn {
+        padding: var(--space-xs);
+    }
+    
+    .locationBtn span {
+        display: none; /* Hide 'Location' text on mobile, just show icon */
+    }
+}

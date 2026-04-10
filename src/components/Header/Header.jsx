@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import styles from './Header.module.css';
+import LocationSelector from '@/components/LocationSelector/LocationSelector';
 import UserMenu from '@/components/Auth/UserMenu';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAds } from '@/hooks/useFirestore';
@@ -13,7 +14,14 @@ import { menuCategories, trendingTopics } from '@/data/sampleNews';
 export default function Header() {
     const [activeMenu, setActiveMenu] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const router = useRouter();
+    const pathname = usePathname();
+
+    // Close mobile menu on path switch
+    useEffect(() => {
+        setIsMobileMenuOpen(false);
+    }, [pathname]);
 
     const { language, t } = useLanguage();
     const { ads } = useAds({ activeOnly: true });
@@ -61,6 +69,28 @@ export default function Header() {
                     </div>
 
                     <div className={styles.headerActions}>
+                        <LocationSelector />
+                        
+                        <button 
+                            className={styles.hamburgerBtn}
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            aria-label="Toggle menu"
+                        >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                {isMobileMenuOpen ? (
+                                    <>
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </>
+                                ) : (
+                                    <>
+                                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                                    </>
+                                )}
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -79,8 +109,12 @@ export default function Header() {
                 )}
             </div>
 
-            {/* Desktop Navigation */}
-            <div className={styles.navWrapper}>
+            {/* Desktop & Mobile Sidebar Navigation */}
+            <div 
+                className={`${styles.navOverlay} ${isMobileMenuOpen ? styles.open : ''}`} 
+                onClick={() => setIsMobileMenuOpen(false)}
+            ></div>
+            <div className={`${styles.navWrapper} ${isMobileMenuOpen ? styles.open : ''}`}>
                 <div className="container">
                     <nav className={styles.nav}>
                         <div className={styles.navItem}>
