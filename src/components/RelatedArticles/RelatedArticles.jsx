@@ -30,7 +30,7 @@ export default function RelatedArticles({ currentArticleId, category }) {
             </div>
           ))}
         </div>
-      </section> section>
+      </section>
     );
   }
 
