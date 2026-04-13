@@ -479,12 +479,6 @@ export default function ArticleClient() {
                                     ⚠️ {language === 'hi' ? 'यह लेख ड्राफ्ट है' : 'This is a DRAFT'}
                                 </div>
                             )}
-
-                            {/* Related Articles Section */}
-                            <RelatedArticles 
-                                currentArticleId={id} 
-                                category={article.category} 
-                            />
                         </article>
 
                         {/* Sidebar */}
@@ -513,6 +507,12 @@ export default function ArticleClient() {
                             </div>
                         </aside>
                     </div>
+
+                    {/* Related Articles Section - Moved outside to be full-width above footer */}
+                    <RelatedArticles 
+                        currentArticleId={id} 
+                        category={article.category} 
+                    />
                 </div>
             </main>
         </>

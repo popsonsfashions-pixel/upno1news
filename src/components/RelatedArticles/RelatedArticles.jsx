@@ -57,11 +57,24 @@ export default function RelatedArticles({ currentArticleId, category }) {
             className={styles.card}
           >
             <div className={styles.imageWrapper}>
-              <img 
-                src={article.images?.[0]?.url || `https://picsum.photos/seed/${article.id}/800/400`} 
-                alt={article.title} 
-                className={styles.image}
-              />
+              {(() => {
+                let imageUrl = `https://picsum.photos/seed/${article.id}/800/400`;
+                try {
+                  const imgs = typeof article.images === 'string' ? JSON.parse(article.images) : article.images;
+                  if (imgs && imgs.length > 0) {
+                    imageUrl = imgs[0].url || imageUrl;
+                  }
+                } catch (e) {
+                  console.error("Error parsing images", e);
+                }
+                return (
+                  <img 
+                    src={imageUrl} 
+                    alt={article.title} 
+                    className={styles.image}
+                  />
+                );
+              })()}
             </div>
             <div className={styles.content}>
               <span className={styles.category}>{article.category}</span>
