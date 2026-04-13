@@ -9,6 +9,7 @@ import { useAuth } from '@/context/AuthContext';
 import Header from '@/components/Header/Header';
 import AdBanner from '@/components/AdBanner/AdBanner';
 import GoogleAd from '@/components/GoogleAd/GoogleAd';
+import RelatedArticles from '@/components/RelatedArticles/RelatedArticles';
 import { translateText, hasHindiCharacters } from '@/utils/translate';
 import styles from './article.module.css';
 
@@ -478,6 +479,12 @@ export default function ArticleClient() {
                                     ⚠️ {language === 'hi' ? 'यह लेख ड्राफ्ट है' : 'This is a DRAFT'}
                                 </div>
                             )}
+
+                            {/* Related Articles Section */}
+                            <RelatedArticles 
+                                currentArticleId={id} 
+                                category={article.category} 
+                            />
                         </article>
 
                         {/* Sidebar */}
