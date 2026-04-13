@@ -8,6 +8,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useAuth } from '@/context/AuthContext';
 import Header from '@/components/Header/Header';
 import AdBanner from '@/components/AdBanner/AdBanner';
+import GoogleAd from '@/components/GoogleAd/GoogleAd';
 import { translateText, hasHindiCharacters } from '@/utils/translate';
 import styles from './article.module.css';
 
@@ -390,7 +391,7 @@ export default function ArticleClient() {
                             {!middleAds.length && (
                                 <div className={styles.adBanner}>
                                     <span className={styles.adLabel}>{language === 'hi' ? 'विज्ञापन' : 'Advertisement'}</span>
-                                    <div className={styles.adPlaceholder}>728 × 90</div>
+                                    <GoogleAd />
                                 </div>
                             )}
 
@@ -493,7 +494,7 @@ export default function ArticleClient() {
                                         />
                                     ))
                                 ) : (
-                                    <div className={styles.adPlaceholderVertical}>300 × 600</div>
+                                    <GoogleAd />
                                 )}
                             </div>
 

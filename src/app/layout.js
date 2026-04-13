@@ -2,6 +2,7 @@ import { Inter, Playfair_Display } from 'next/font/google';
 import { AuthProvider } from '@/context/AuthContext';
 import { LanguageProvider } from '@/context/LanguageContext';
 import Footer from '@/components/Footer/Footer';
+import Script from 'next/script';
 import './globals.css';
 
 const inter = Inter({
@@ -25,6 +26,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="hi" className={`${inter.variable} ${playfair.variable}`}>
+      <head>
+        <Script
+          id="google-adsense"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7059012990341250"
+          crossOrigin="anonymous"
+          strategy="lazyOnload"
+        />
+      </head>
       <body>
         <LanguageProvider>
           <AuthProvider>
