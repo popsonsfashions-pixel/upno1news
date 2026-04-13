@@ -239,6 +239,17 @@ export default function ArticleClient() {
                             {/* Meta */}
                             {heroImages.length === 0 && (
                                 <>
+                                    <div className={styles.breadcrumb}>
+                                        <Link href="/" className={styles.breadcrumbHome}>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                                <polyline points="9 22 9 12 15 12 15 22" />
+                                            </svg>
+                                            {language === 'hi' ? 'होम' : 'Home'}
+                                        </Link>
+                                        <span className={styles.breadcrumbSep}>›</span>
+                                        <span className={styles.breadcrumbCategory}>{article.category || 'News'}</span>
+                                    </div>
                                     <div className={styles.meta}>
                                         <span className={styles.category}>{article.category || 'News'}</span>
                                         <span className={styles.dot}>•</span>
@@ -260,7 +271,7 @@ export default function ArticleClient() {
                             {/* Author Bar */}
                             <div className={styles.authorBar}>
                                 <div className={styles.authorAvatar}>
-                                    {(article.author_name || article.author_email)?.charAt(0).toUpperCase()}
+                                    <img src="/logo.png" alt="UP News No.1" className={styles.authorAvatarImg} />
                                 </div>
                                 <div className={styles.authorInfo}>
                                     <span className={styles.authorName}>
