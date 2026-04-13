@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useStatuses, createStatus, deleteStatus } from '@/hooks/useFirestore';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { useSearchParams } from 'next/navigation';
 import styles from './StatusSection.module.css';
 
 // ImgBB API for image uploads
@@ -24,8 +25,10 @@ export default function StatusSection() {
     const [posting, setPosting] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [progress, setProgress] = useState(0);
+    const searchParams = useSearchParams();
     const fileInputRef = useRef(null);
     const progressIntervalRef = useRef(null);
+    const deepLinkHandledRef = useRef(false);
 
     // Get active status from index
     const activeStatus = activeStatusIndex !== null ? statuses[activeStatusIndex] : null;
@@ -59,6 +62,20 @@ export default function StatusSection() {
             }
         };
     }, [activeStatusIndex, statuses.length]);
+
+    // Handle deep linking for storyId parameter
+    useEffect(() => {
+        if (!loading && statuses.length > 0 && !deepLinkHandledRef.current) {
+            const storyId = searchParams.get('storyId');
+            if (storyId) {
+                const index = statuses.findIndex(s => s.id === storyId);
+                if (index !== -1) {
+                    setActiveStatusIndex(index);
+                    deepLinkHandledRef.current = true;
+                }
+            }
+        }
+    }, [loading, statuses, searchParams]);
 
     const openStatus = (index) => {
         setActiveStatusIndex(index);
@@ -185,7 +202,8 @@ export default function StatusSection() {
 
     const handleShare = async (status, platform) => {
         const text = status.title;
-        const url = window.location.origin;
+        // Use specifically the storyId for social sharing previews
+        const url = `${window.location.origin}/?storyId=${status.id}`;
         const fullText = `${text} - ${url}`;
 
         const shareUrls = {

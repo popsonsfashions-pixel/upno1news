@@ -1,267 +1,85 @@
-"use client";
+import { db } from '@/lib/firebase';
+import { doc, getDoc } from 'firebase/firestore';
+import HomeClient from './HomeClient';
+import { Suspense } from 'react';
 
-import Header from '@/components/Header/Header';
-import StatusSection from '@/components/StatusSection/StatusSection';
-import { useArticles } from '@/hooks/useFirestore';
-import { useLanguage } from '@/context/LanguageContext';
-import NewsCard from '@/components/NewsCard/NewsCard';
-import TranslatedText from '@/components/TranslatedText';
-import AdBanner from '@/components/AdBanner/AdBanner';
-import { useAds } from '@/hooks/useFirestore';
-import styles from './page.module.css';
+// Server-side metadata generation for social sharing (WhatsApp/FB previews)
+export async function generateMetadata({ searchParams }) {
+    // Await searchParams in Next.js 15+
+    const sParams = await searchParams;
+    const storyId = sParams?.storyId;
 
-export default function Home() {
-  const { articles, loading } = useArticles({ publishedOnly: true });
-  const { language, t } = useLanguage();
-  const { ads } = useAds({ activeOnly: true });
+    if (storyId) {
+        try {
+            // Fetch the specific story/status for detailed preview
+            const docRef = doc(db, 'statuses', storyId);
+            const docSnap = await getDoc(docRef);
 
-  const sidebarAds = ads.filter(ad =>
-    (ad.position === 'sidebar' || !ad.position) &&
-    (ad.target === 'homepage' || ad.target === 'all' || !ad.target)
-  );
+            if (docSnap.exists()) {
+                const status = docSnap.data();
+                const title = status.title || "UP News No.1 Web Story";
+                const imageUrl = status.imageUrl || 'https://upno1news.vercel.app/logo.png';
+                const description = status.title ? `Watch this web story: ${status.title}` : "Stay updated with the latest news on UP News No.1";
 
-  // Filter by placement
-  const hasPlacement = (article, placement) => {
-    const list = article.placements || (article.placement ? [article.placement] : []);
-    return list.includes(placement);
-  };
+                return {
+                    title: `${title} | UP News No.1`,
+                    description: description,
+                    openGraph: {
+                        title: title,
+                        description: description,
+                        url: `https://upno1news.in/?storyId=${storyId}`,
+                        siteName: 'UP News No.1',
+                        images: [
+                            {
+                                url: imageUrl,
+                                width: 1200,
+                                height: 630,
+                                alt: title,
+                            },
+                        ],
+                        locale: 'hi_IN',
+                        type: 'website',
+                    },
+                    twitter: {
+                        card: 'summary_large_image',
+                        title: title,
+                        description: description,
+                        images: [imageUrl],
+                    },
+                };
+            }
+        } catch (error) {
+            console.error('Error fetching story metadata:', error);
+        }
+    }
 
-  const heroArticles = articles.filter(a => hasPlacement(a, 'hero'));
-  const breakingArticles = articles.filter(a => hasPlacement(a, 'breaking'));
-  const featuredArticles = articles.filter(a => hasPlacement(a, 'featured'));
-  const trendingArticles = articles.filter(a => hasPlacement(a, 'trending'));
+    // Default metadata for homepage
+    return {
+        title: 'UP News No.1 - उत्तर प्रदेश की नंबर 1 खबर',
+        description: 'Get the latest news from Uttar Pradesh, Bollywood, Cricket, Finance and World. उत्तर प्रदेश की ताज़ा खबरें।',
+        openGraph: {
+            title: 'UP News No.1 - उत्तर प्रदेश की नंबर 1 खबर',
+            description: 'Get the latest news from Uttar Pradesh, Bollywood, Cricket, Finance and World. उत्तर प्रदेश की ताज़ा खबरें।',
+            url: 'https://upno1news.in',
+            siteName: 'UP News No.1',
+            images: [
+                {
+                    url: 'https://upno1news.in/logo.png',
+                    width: 1200,
+                    height: 630,
+                    alt: 'UP News No.1',
+                },
+            ],
+            locale: 'hi_IN',
+            type: 'website',
+        },
+    };
+}
 
-  // Normal articles: exclude those that are ONLY in special homepage sections? 
-  // Or just include everything that isn't explicitly just a special placement?
-  // Traditionally 'normal' meant no special placement. 
-  // If an article is 'hero', it might also be 'normal' list worthy? 
-  // Let's stick to the previous logic: if it has NO special placement, it's normal.
-  // Or if it explicitly has 'normal' or empty placements.
-  // Latest News: Show ALL articles except Bollywood (as per user request)
-  const normalArticles = articles.filter(a => a.category !== 'Bollywood');
-
-  const formatTimeAgo = (date) => {
-    if (!date) return t('justNow');
-    const now = new Date();
-    const then = date instanceof Date ? date : new Date(date);
-    const seconds = Math.floor((now - then) / 1000);
-    if (seconds < 60) return t('justNow');
-    if (seconds < 3600) return `${Math.floor(seconds / 60)} ${t('minsAgo')}`;
-    if (seconds < 86400) return `${Math.floor(seconds / 3600)} ${t('hoursAgo')}`;
-    return `${Math.floor(seconds / 86400)} ${t('daysAgo')}`;
-  };
-
-  const getFirstImage = (article) => {
-    return article.images?.[0]?.url || `https://picsum.photos/seed/${article.id}/800/400`;
-  };
-
-  if (loading) {
+export default function HomePage() {
     return (
-      <>
-        <Header />
-        <main className={styles.main}>
-          <div className="container">
-            <div className={styles.skeletonLoading}>
-              {/* Skeleton Hero Section */}
-              <div className={styles.skeletonHeroSection}>
-                <div className={`${styles.skeleton} ${styles.skeletonHeroMain}`}></div>
-                <div className={styles.skeletonHeroSide}>
-                  <div className={`${styles.skeleton} ${styles.skeletonHeroCard}`}></div>
-                  <div className={`${styles.skeleton} ${styles.skeletonHeroCard}`}></div>
-                </div>
-              </div>
-
-              {/* Skeleton Main Layout */}
-              <div className={styles.skeletonMainLayout}>
-                <div className={styles.skeletonContent}>
-                  <div className={styles.skeletonSection}>
-                    <div className={`${styles.skeleton} ${styles.skeletonTitle}`}></div>
-                    {[1, 2, 3, 4].map(i => (
-                      <div key={i} className={styles.skeletonCard}>
-                        <div className={`${styles.skeleton} ${styles.skeletonCardImage}`}></div>
-                        <div className={styles.skeletonCardContent}>
-                          <div className={`${styles.skeleton} ${styles.skeletonCardTitle}`}></div>
-                          <div className={`${styles.skeleton} ${styles.skeletonCardExcerpt}`}></div>
-                          <div className={`${styles.skeleton} ${styles.skeletonCardMeta}`}></div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className={styles.skeletonSidebar}>
-                  <div className={`${styles.skeleton} ${styles.skeletonSidebarBox}`}></div>
-                  <div className={`${styles.skeleton} ${styles.skeletonSidebarBox}`}></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </main>
-      </>
+        <Suspense fallback={null}>
+            <HomeClient />
+        </Suspense>
     );
-  }
-
-  return (
-    <>
-      <Header />
-
-      <main className={styles.main}>
-        <div className="container">
-          {/* Breaking News Ticker */}
-          {breakingArticles.length > 0 && (
-            <div className={styles.breakingNews}>
-              <div className={styles.breakingScroll}>
-                <span className={styles.breakingLabel}>
-                  🔴 {t('breakingNews')}
-                </span>
-                {breakingArticles.map(article => (
-                  <a key={article.id} href={`/article/${article.id}`}>
-                    <TranslatedText text={article.title} />
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Status Section */}
-          <StatusSection />
-
-          {/* Hero Section */}
-          {heroArticles.length > 0 && (
-            <section className={styles.heroSection}>
-              <div className={styles.heroMain}>
-                <NewsCard
-                  variant="hero"
-                  isMain={true}
-                  title={heroArticles[0].title}
-                  excerpt={heroArticles[0].content?.substring(0, 200) + '...'}
-                  image={getFirstImage(heroArticles[0])}
-                  category={heroArticles[0].category}
-                  time={formatTimeAgo(heroArticles[0].created_at)}
-                  href={`/article/${heroArticles[0].id}`}
-                />
-              </div>
-              {heroArticles.length > 1 && (
-                <div className={styles.heroSide}>
-                  {heroArticles.slice(1, 3).map(article => (
-                    <NewsCard
-                      key={article.id}
-                      variant="hero"
-                      title={article.title}
-                      image={getFirstImage(article)}
-                      category={article.category}
-                      time={formatTimeAgo(article.created_at)}
-                      href={`/article/${article.id}`}
-                    />
-                  ))}
-                </div>
-              )}
-            </section>
-          )}
-
-          {/* Main Layout */}
-          <div className={styles.mainLayout}>
-            <div className={styles.content}>
-              {/* Featured Section */}
-              {featuredArticles.length > 0 && (
-                <section className={styles.section}>
-                  <h2 className={styles.sectionTitle}>
-                    <span className={styles.fireIcon}>🔥</span> {t('featured')}
-                  </h2>
-                  <div className={styles.featuredGrid}>
-                    {featuredArticles.map(article => (
-                      <NewsCard
-                        key={article.id}
-                        variant="list"
-                        title={article.title}
-                        excerpt={article.content?.substring(0, 100) + '...'}
-                        image={getFirstImage(article)}
-                        category={article.category}
-                        time={formatTimeAgo(article.created_at)}
-                        href={`/article/${article.id}`}
-                      />
-                    ))}
-                  </div>
-                </section>
-              )}
-
-              {/* Latest News */}
-              <section className={styles.section}>
-                <h2 className={styles.sectionTitle}>
-                  <span className={styles.liveIndicator}></span> {t('latestNews')}
-                </h2>
-                {normalArticles.length === 0 && heroArticles.length === 0 && featuredArticles.length === 0 ? (
-                  <div className={styles.empty}>
-                    <p>{language === 'hi' ? 'अभी तक कोई समाचार प्रकाशित नहीं हुआ।' : 'No articles published yet.'}</p>
-                    <p>{language === 'hi' ? 'समाचार बनाएं और प्रकाशित करें!' : 'Create and publish articles to see them here!'}</p>
-                  </div>
-                ) : (
-                  <div className={styles.newsList}>
-                    {normalArticles.map(article => (
-                      <NewsCard
-                        key={article.id}
-                        variant="list"
-                        title={article.title}
-                        excerpt={article.content?.substring(0, 150) + '...'}
-                        image={getFirstImage(article)}
-                        category={article.category}
-                        time={formatTimeAgo(article.created_at)}
-                        href={`/article/${article.id}`}
-                      />
-                    ))}
-                  </div>
-                )}
-              </section>
-            </div>
-
-            {/* Sidebar */}
-            <aside className={styles.sidebar}>
-              {/* Trending */}
-              {trendingArticles.length > 0 && (
-                <div className={styles.sidebarSection}>
-                  <h3 className={styles.sidebarTitle}>
-                    📈 {language === 'hi' ? 'ट्रेंडिंग' : 'Trending'}
-                  </h3>
-                  <div className={styles.trendingList}>
-                    {trendingArticles.map((article, index) => (
-                      <a key={article.id} href={`/article/${article.id}`} className={styles.trendingItem}>
-                        <span className={styles.trendingNum}>{index + 1}</span>
-                        <span className={styles.trendingTitle}>
-                          <TranslatedText text={article.title} />
-                        </span>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Newsletter */}
-              <div className={styles.newsletter}>
-                <h3>{t('stayUpdated')}</h3>
-                <p>{t('newsletter')}</p>
-                <input type="email" placeholder={t('yourEmail')} />
-                <button>{t('subscribe')}</button>
-              </div>
-
-              {/* Sidebar Ads */}
-              {sidebarAds.map(ad => (
-                <AdBanner
-                  key={ad.id}
-                  imageUrl={ad.imageUrl}
-                  linkUrl={ad.linkUrl}
-                  label={language === 'hi' ? 'विज्ञापन' : 'Advertisement'}
-                />
-              ))}
-
-              {!sidebarAds.length && (
-                <div className={styles.adBox}>
-                  <span>{language === 'hi' ? 'विज्ञापन' : 'Advertisement'}</span>
-                  <div className={styles.adPlaceholder}>300 × 250</div>
-                </div>
-              )}
-            </aside>
-          </div>
-        </div>
-      </main>
-    </>
-  );
 }
