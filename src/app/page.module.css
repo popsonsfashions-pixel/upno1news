@@ -477,12 +477,12 @@
 
   .breakingNews {
     margin-bottom: var(--space-sm);
-    padding: 4px var(--space-md);
+    padding: 2px var(--space-md);
     border-radius: 0;
   }
 
   .breakingLabel {
-    font-size: 0.6875rem;
+    font-size: 0.8125rem;
     padding-right: var(--space-sm);
   }
 
@@ -491,7 +491,8 @@
   }
 
   .breakingScroll a {
-    font-size: 0.8125rem;
+    font-size: 1rem;
+    font-weight: 600;
   }
 
   .heroMain {
@@ -537,13 +538,13 @@
   }
 
   .breakingLabel {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 0.05em;
   }
 
   .breakingScroll a {
-    font-size: 0.75rem;
+    font-size: 0.9375rem;
   }
 
   .heroMain {
