@@ -196,15 +196,17 @@
   border-right: 1px solid rgba(255, 255, 255, 0.3);
   white-space: nowrap;
   flex-shrink: 0;
+  line-height: 1;
 }
 
 .breakingScroll {
   display: flex;
   gap: var(--space-xl);
   padding-left: var(--space-md);
-  animation: ticker 40s linear infinite;
+  animation: ticker 60s linear infinite;
   white-space: nowrap;
   flex: 0 0 auto;
+  align-items: center;
 }
 
 .breakingScroll:hover {
@@ -226,6 +228,7 @@
   text-decoration: none;
   font-size: 0.875rem;
   white-space: nowrap;
+  line-height: 1;
 }
 
 .breakingScroll a:hover {
