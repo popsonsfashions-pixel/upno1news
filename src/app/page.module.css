@@ -188,6 +188,8 @@
 }
 
 .breakingLabel {
+  display: flex;
+  align-items: center;
   font-weight: 700;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -197,16 +199,17 @@
   white-space: nowrap;
   flex-shrink: 0;
   line-height: 1;
+  height: 100%;
 }
 
 .breakingScroll {
   display: flex;
   gap: var(--space-xl);
-  padding-left: var(--space-md);
   animation: ticker 60s linear infinite;
   white-space: nowrap;
-  flex: 0 0 auto;
+  flex: 1;
   align-items: center;
+  height: 100%;
 }
 
 .breakingScroll:hover {

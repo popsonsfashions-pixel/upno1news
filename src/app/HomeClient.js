@@ -104,10 +104,10 @@ export default function HomeClient() {
           {/* Breaking News Ticker */}
           {breakingArticles.length > 0 && (
             <div className={styles.breakingNews}>
+              <span className={styles.breakingLabel}>
+                🔴 {t('breakingNews')}
+              </span>
               <div className={styles.breakingScroll}>
-                <span className={styles.breakingLabel}>
-                  🔴 {t('breakingNews')}
-                </span>
                 {breakingArticles.map(article => (
                   <a key={article.id} href={`/article/${article.id}`}>
                     <TranslatedText text={article.title} />
